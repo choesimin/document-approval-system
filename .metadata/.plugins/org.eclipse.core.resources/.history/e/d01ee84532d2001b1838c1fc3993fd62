@@ -1,0 +1,33 @@
+package com.simin.approval;
+
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import com.simin.approval.model.domain.User;
+import com.simin.approval.model.mapper.UserMapper;
+
+@SpringBootTest
+class DBTest {
+	@Autowired
+	private UserMapper mapper;
+
+	@Test
+	void contextLoads() {
+		List<User> user_list = mapper.listUser();
+		
+		
+		for (User user : user_list) {
+			
+			System.out.println("id : " + user.getId());
+			System.out.println();
+			System.out.println();
+			System.out.println();
+			System.out.println();
+			
+		}
+	}
+
+}

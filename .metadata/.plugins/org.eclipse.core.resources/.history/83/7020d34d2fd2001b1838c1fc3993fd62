@@ -1,0 +1,24 @@
+create database approval;
+
+create user simin@localhost identified by '0101';
+
+create table user (
+ id 
+ , uid
+ , password
+ , name
+);
+
+grant all privileges on approval.* to simin@localhost;
+
+flush frivileges;
+
+
+
+create table user (
+
+);
+
+
+
+insert into user(

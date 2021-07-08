@@ -1,0 +1,18 @@
+create database approval;
+
+create user simin@localhost identified by '0101';
+
+grant all privileges on approval.* to simin@localhost;
+
+flush privileges;
+
+
+
+create table user (
+ id int not null auto_increment primary key
+ , uid char(20) not null
+ , password char(100) not null
+ , name char(20) not null
+);
+
+insert into user(uid, password, name) values('simin96', 'so1130', '최시민');

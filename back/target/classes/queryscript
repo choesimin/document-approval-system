@@ -1,0 +1,70 @@
+create database approval;
+
+create user simin@localhost identified by '0101';
+
+grant all privileges on approval.* to simin@localhost;
+
+flush privileges;
+
+
+
+
+
+
+drop table approver;
+drop table document;
+drop table user;
+
+create table user (
+ seq int not null auto_increment primary key
+ , id char(20) not null
+ , password char(100) not null
+ , name char(20) not null
+ , regdate timestamp not null default current_timestamp
+);
+
+create table document (
+ seq int not null auto_increment primary key
+ , user_seq int not null
+ , state varchar(10) not null
+ , title varchar(100) not null
+ , content text not null
+ , turn int not null default 1
+ , regdate timestamp not null default current_timestamp
+ , findate timestamp default null
+ , constraint fk_user_document foreign key(user_seq) references user(seq) on delete cascade
+);
+
+create table approver (
+ seq int not null auto_increment primary key
+ , user_seq int not null
+ , document_seq int not null
+ , state varchar(10) not null default 'proceed'
+ , opinion text default null
+ , turn int not null default 1
+ , findate timestamp default null
+ , constraint fk_user_approver foreign key(user_seq) references user(seq) on delete cascade
+ , constraint fk_document_approver foreign key(document_seq) references document(seq) on delete cascade
+);
+
+
+
+
+
+select seq, user_seq, state, title, content, turn, regdate, findate
+from document
+where user_seq=1
+    and state='proceed'
+    and title like concat('%', 'a', '%')
+order by seq desc
+
+
+select distinct document.seq, document.user_seq, document.state, document.title, document.content, document.turn, document.regdate, document.findate
+from document
+    inner join approver
+        on document.seq=approver.document_seq
+            and document.state='proceed'
+            and document.turn=approver.turn
+            and approver.user_seq=1
+            and title like concat('%', 'a', '%')
+order by document.seq desc;

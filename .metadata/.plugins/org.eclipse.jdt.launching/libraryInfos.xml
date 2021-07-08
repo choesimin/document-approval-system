@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<libraryInfos>
+    <libraryInfo home="/Applications/Eclipse.app/Contents/Eclipse/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.macosx.x86_64_15.0.2.v20210201-0955" version="15.0.2"/>
+    <libraryInfo home="/usr/local/Cellar/openjdk@8/1.8.0+282/libexec/openjdk.jdk/Contents/Home" version="1.8.0_282">
+        <bootpath>
+            <entry path="/usr/local/Cellar/openjdk@8/1.8.0+282/libexec/openjdk.jdk/Contents/Home/jre/lib/resources.jar"/>
+            <entry path="/usr/local/Cellar/openjdk@8/1.8.0+282/libexec/openjdk.jdk/Contents/Home/jre/lib/rt.jar"/>
+            <entry path="/usr/local/Cellar/openjdk@8/1.8.0+282/libexec/openjdk.jdk/Contents/Home/jre/lib/sunrsasign.jar"/>
+            <entry path="/usr/local/Cellar/openjdk@8/1.8.0+282/libexec/openjdk.jdk/Contents/Home/jre/lib/jsse.jar"/>
+            <entry path="/usr/local/Cellar/openjdk@8/1.8.0+282/libexec/openjdk.jdk/Contents/Home/jre/lib/jce.jar"/>
+            <entry path="/usr/local/Cellar/openjdk@8/1.8.0+282/libexec/openjdk.jdk/Contents/Home/jre/lib/charsets.jar"/>
+            <entry path="/usr/local/Cellar/openjdk@8/1.8.0+282/libexec/openjdk.jdk/Contents/Home/jre/lib/jfr.jar"/>
+            <entry path="/usr/local/Cellar/openjdk@8/1.8.0+282/libexec/openjdk.jdk/Contents/Home/jre/classes"/>
+        </bootpath>
+        <extensionDirs>
+            <entry path="/Users/simin/Library/Java/Extensions"/>
+            <entry path="/usr/local/Cellar/openjdk@8/1.8.0+282/libexec/openjdk.jdk/Contents/Home/jre/lib/ext"/>
+            <entry path="/Library/Java/Extensions"/>
+            <entry path="/Network/Library/Java/Extensions"/>
+            <entry path="/System/Library/Java/Extensions"/>
+            <entry path="/usr/lib/java"/>
+        </extensionDirs>
+        <endorsedDirs>
+            <entry path="/usr/local/Cellar/openjdk@8/1.8.0+282/libexec/openjdk.jdk/Contents/Home/jre/lib/endorsed"/>
+        </endorsedDirs>
+    </libraryInfo>
+    <libraryInfo home="/Applications/Eclipse.app/Contents/Eclipse/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.macosx.x86_64_15.0.2.v20210201-0955/jre" version="15.0.2"/>
+</libraryInfos>

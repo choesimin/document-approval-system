@@ -1,0 +1,38 @@
+package com.simin.approval;
+
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import com.simin.approval.model.domain.User;
+import com.simin.approval.model.service.UserService;
+
+@SpringBootTest
+class UserInsert {
+	@Autowired
+	private UserService userService;
+
+	@Test
+	void contextLoads() {
+		User user = new User();
+		
+		user.setUid("test_uid");
+		user.setPassword("test_password");
+		user.setName("test_name");
+	
+		userMapper.insert(user);
+
+		List<User> user_list = userMapper.list();
+		
+		for (User user_of_list : user_list) {
+			System.out.println("id : " + user_of_list.getId());
+			System.out.println("uid : " + user_of_list.getUid());
+			System.out.println("password : " + user_of_list.getPassword());
+			System.out.println("name : " + user_of_list.getName());
+			System.out.println("--------");
+		}
+	}
+
+}

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.simin.approval.model.mapper.ApproverMapper">
+
+    <sql id="selectCommon">
+        select seq, user_seq, document_seq, state, opinion, turn, findate
+        from approver
+    </sql>
+
+    <resultMap type="Approver" id="approverMap">
+        <id property="seq" column="seq" />
+        <result property="user_seq" column="user_seq" />
+        <result property="document_seq" column="document_seq" />
+        <result property="state" column="state" />
+        <result property="opinion" column="opinion" />
+        <result property="turn" column="turn" />
+        <result property="findate" column="findate" />
+        <association property="user_name" column="user_seq" javaType="String" select="com.simin.approval.model.mapper.UserMapper.selectName" />
+    </resultMap>
+
+    <select id="selectByDocumentSeq" parameterType="int" resultMap="approverMap">
+        <include refid="selectCommon" />
+        where document_seq=#{document_seq}
+    </select>
+
+    <select id="countByDocumentSeq" parameterType="int" resultType="int">
+        select count(seq)
+        from approver
+        where document_seq=#{document_seq}
+    </select>
+
+    <insert id="insert" parameterType="Approver">
+        insert into approver(user_seq, document_seq, turn)
+        values(#{user_seq}, #{document_seq}, #{turn})
+    </insert>
+
+    <update id="updateState" parameterType="Approver">
+        update approver set state=#{state}
+        where seq=#{seq}
+    </update>
+
+    <update id="updateFindate" parameterType="Approver">
+        update approver set findate=#{findate}
+        where seq=#{seq}
+    </update>
+
+    <update id="updateOpinion" parameterType="Approver">
+        update approver set opinion=#{opinion}
+        where seq=#{seq}
+    </update>
+
+</mapper>

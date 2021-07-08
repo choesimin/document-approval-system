@@ -1,0 +1,33 @@
+package com.simin.approval.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.simin.approval.model.domain.User;
+import com.simin.approval.model.service.UserService;
+
+@RestController
+@RequestMapping("/user")
+public class UserController {
+	
+	@Autowired
+	private UserService userService;
+	
+	@RequestMapping("/regist")
+	public String regist(User user) {
+		System.out.print(user.toString());
+
+		userService.regist(user);
+		
+		return "user regist successed";
+	}
+	
+	@RequestMapping("/login")
+	public String login(User user) {
+		
+		return "";
+	}
+
+}

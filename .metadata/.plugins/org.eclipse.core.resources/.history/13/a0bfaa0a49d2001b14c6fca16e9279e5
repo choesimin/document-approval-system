@@ -1,0 +1,23 @@
+package com.simin.approval;
+
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import com.simin.approval.model.domain.User;
+import com.simin.approval.model.mapper.UserMapper;
+
+@SpringBootTest
+class UserInsert {
+	@Autowired
+	private UserMapper userMapper;
+
+	@Test
+	void contextLoads() {
+		userMapper.insert();
+		
+	}
+
+}

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.simin.approval.model.mapper.DocumentMapper">
+
+    <sql id="selectCommon">
+        select seq, user_seq, state, title, content, turn, regdate, findate
+        from document
+    </sql>
+
+    <!-- resultMap for document list -->
+    <resultMap type="Document" id="documentMap">
+        <id property="seq" column="seq" />
+        <result property="user_seq" column="user_seq" />
+        <result property="state" column="state" />
+        <result property="title" column="title" />
+        <result property="content" column="content" />
+        <association property="user_name" column="user_seq" javaType="String" select="com.simin.approval.model.mapper.UserMapper.selectName" />
+    </resultMap>
+
+    <select id="select" parameterType="int" resultMap="documentMap">
+        <include refid="selectCommon" />
+        where seq=#{seq}
+    </select>
+
+    <select id="selectOutbox" parameterType="int" resultMap="documentMap">
+        <include refid="selectCommon" />
+        where user_seq=#{user_seq}
+            and state='proceed'
+        order by seq desc
+    </select>
+
+    <select id="selectInbox" parameterType="int" resultMap="documentMap">
+        select distinct document.seq, document.user_seq, document.state, document.title, document.content, document.turn, document.regdate, document.findate
+        from document
+        inner join approver
+            on document.seq=approver.document_seq
+                and document.state='proceed'
+                and document.turn=approver.turn
+                and approver.user_seq=#{user_seq}
+        order by document.seq desc
+    </select>
+
+    <select id="selectArchive" parameterType="int" resultMap="documentMap">
+        select distinct document.seq, document.user_seq, document.state, document.title, document.content, document.turn, document.regdate, document.findate
+        from document
+        inner join approver
+            on document.seq=approver.document_seq
+                and (document.state='approve' or document.state='reject')
+                and (approver.user_seq=#{user_seq} or document.user_seq=#{user_seq})
+        order by document.seq desc
+    </select>
+
+    <select id="selectOutboxSearch" parameterType="Document" resultMap="documentMap">
+        <include refid="selectCommon" />
+        where user_seq=#{user_seq}
+            and state='proceed'
+            and title like concat('%', #{search_word}, '%')
+        order by seq desc
+    </select>
+
+    <select id="selectInboxSearch" parameterType="Document" resultMap="documentMap">
+        select distinct document.seq, document.user_seq, document.state, document.title, document.content, document.turn, document.regdate, document.findate
+        from document
+            inner join approver
+                on document.seq=approver.document_seq
+                    and document.state='proceed'
+                    and document.turn=approver.turn
+                    and approver.user_seq=#{user_seq}
+                    and title like concat('%', #{search_word}, '%')
+        order by document.seq desc
+    </select>
+
+    <select id="selectArchiveSearch" parameterType="Document" resultMap="documentMap">
+        select distinct document.seq, document.user_seq, document.state, document.title, document.content, document.turn, document.regdate, document.findate
+        from document
+            inner join approver
+                on document.seq=approver.document_seq
+                    and (document.state='approve' or document.state='reject')
+                    and (approver.user_seq=#{user_seq} or document.user_seq=#{user_seq})
+                    and title like concat('%', #{search_word}, '%')
+        order by document.seq desc
+    </select>
+
+    <!-- error when id is "insert" -->
+    <insert id="insertDocument" parameterType="Document" useGeneratedKeys="true" keyProperty="seq">
+        insert into document(user_seq, title, content,  state, turn)
+        values(#{user_seq}, #{title}, #{content}, 'proceed', 1)
+    </insert>
+
+    <update id="updateState" parameterType="Document">
+        update document set state=#{state}
+        where seq=#{seq}
+    </update>
+
+    <update id="updateFindate" parameterType="Document">
+        update document set findate=#{findate}
+        where seq=#{seq}
+    </update>
+
+    <update id="updateTurn" parameterType="Document">
+        update document set turn=#{turn}
+        where seq=#{seq}
+    </update>
+
+</mapper>

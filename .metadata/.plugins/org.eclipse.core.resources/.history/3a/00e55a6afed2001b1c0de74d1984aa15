@@ -1,0 +1,5 @@
+package com.simin.approval.model.common;
+
+public class SimpleCORSFilter {
+
+}

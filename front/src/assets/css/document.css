@@ -1,0 +1,30 @@
+#content {
+  margin-left: 200px;
+  width: 600px;
+  word-break: break-all;
+}
+h1 {
+  font-size: 20px;
+}
+textarea {
+  width: 100%;
+  padding: 8px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+  border: 1px solid black;
+}
+tr:hover {
+  background-color: black;
+  color: white;
+}
+th, td {
+  padding: 10px;
+}
+
+.button_active {
+  background-color: black;
+  color: white;
+}

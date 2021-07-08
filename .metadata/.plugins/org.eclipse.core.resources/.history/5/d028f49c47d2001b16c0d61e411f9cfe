@@ -1,0 +1,2 @@
+*{margin:0;padding:0;font-size:15px}button,input{border:1px solid #000;padding:10px;background-color:#fff}button:hover{color:#fff;background-color:#000}#content{padding:20px}
+/*# sourceMappingURL=app.38f5e8907834677fda85563f30f65aa5.css.map */

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.simin.approval.model.mapper.UserMapper">
+
+	<sql id="selectCommon">
+		select seq, id, password, name, regdate
+		from user
+	</sql>
+
+	<sql id="countCommon">
+		select count(seq)
+		from user
+	</sql>
+
+	<select id="selectName" parameterType="int" resultType="String">
+		select name
+		from user
+		where seq=#{seq}
+	</select>
+
+	<select id="selectAll" resultType="User">
+		<include refid="selectCommon" />
+	</select>
+
+	<select id="selectById" parameterType="String" resultType="User">
+		<include refid="selectCommon" />
+		where id=#{value}
+	</select>
+
+	<select id="selectByIdAndPassword" parameterType="User" resultType="User">
+		<include refid="selectCommon" />
+		where id=#{id} and password=#{password}
+	</select>
+
+	<select id="countById" parameterType="String" resultType="int">
+		<include refid="countCommon" />
+		where id=#{value}
+	</select>
+
+	<insert id="insert" parameterType="User">
+		insert into user(id, password, name)
+		values (#{id}, #{password}, #{name})
+	</insert>
+
+</mapper>
